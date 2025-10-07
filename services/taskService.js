@@ -6,4 +6,24 @@ async function createTask(data, userId) {
     return task;
 }
 
-module.exports = { createTask }
+async function updateTask(taskId, data, userId) {
+    const task = await Task.findOneandUpdate(
+        { _id: taskId, createdBy: userId },
+        data,
+        { new: true }
+    );
+    return task;
+}
+
+async function deleteTask(taskId, userId){
+    const task = await Task.findOneandDelete(
+        { _id: taskId, createdBy: userId }
+    );
+    return task;
+}
+
+async function getTasks(userId) {
+    return await Task.find({ createdBy: userId })
+}
+
+module.exports = { createTask, updateTask, deleteTask, getTasks }
