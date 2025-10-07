@@ -7,7 +7,7 @@ async function createTask(req, res) {
 
   try {
     const task = await taskService.createTask(req.body, req.user.id);
-    res.json({ success: true, task });
+    res.json({ success: true, task, message: 'Task successfully created!'});
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -20,7 +20,7 @@ async function updateTask(req, res) {
   try {
     const task = await taskService.updateTask(req.params.id, req.body, req.user.id);
     if (!task) return res.status(404).json({ success: false, message: 'Task not found or unauthorized' });
-    res.json({ success: true, task });
+    res.json({ success: true, task, message: 'Task successfully updated!'});
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -30,7 +30,7 @@ async function deleteTask(req, res) {
   try {
     const task = await taskService.deleteTask(req.params.id, req.user.id);
     if (!task) return res.status(404).json({ success: false, message: 'Task not found or unauthorized' });
-    res.json({ success: true, message: 'Task deleted' });
+    res.json({ success: true, message: 'Task successfully deleted!' });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
