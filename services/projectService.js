@@ -6,4 +6,10 @@ async function createProject(data, userId) {
     return project;
 }
 
-module.exports = { createProject }
+async function getProjects(userId) {
+    return await Project.find(
+        { createdBy: userId }
+    ).populate('tasks');
+}
+
+module.exports = { createProject, getProjects }
