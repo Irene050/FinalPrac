@@ -7,7 +7,7 @@ async function createProject(req, res) {
 
   try {
     const project = await projectService.createProject(req.body, req.user.id);
-    res.json({ success: true, project });
+    res.json({ success: true, project, message: 'Project succesfully created!' });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
